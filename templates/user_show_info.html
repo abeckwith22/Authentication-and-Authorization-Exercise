@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block page_title %}User Profile{% endblock %}
+{% block content %}
+<h1>User Profile</h1>
+<ul class="profile-ul">
+    <li>Username: {{user.username}}</li>
+    <li>Email: {{user.email}}</li>
+    <li>First Name: {{user.first_name}}</li>
+    <li>Last Name: {{user.last_name}}</li>
+</ul>
+
+<form action="/users/{{user.username}}/delete" method="POST">
+    <button>DELETE USER</button>
+</form>
+<form action="/users/{{user.username}}/feedback/add">
+    <button>ADD FEEDBACK</button>
+</form>
+
+
+{% if feedback %}
+<h1>{{user.username}} Feedback</h1>
+<ul class="feedback-ul">
+    {% for feed in feedback %}
+        <div class="feed">
+            <h3 class="feed-title">{{feed.title}}</h3>
+            <p class="feed-content">{{feed.content}}</p>
+            <form action="/feedback/{{feed.id}}/update" method="GET">
+                <button>EDIT</button>
+            </form>
+            <form action="/feedback/{{feed.id}}/delete" method="POST">
+                <button>DELETE</button>
+            </form>
+        </div>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.navigation {
+    background-color: black;
+    overflow: hidden;
+}
+
+.navigation a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navigation a:hover {
+    /* width: 240px; */
+    font-weight: bold;
+}
+
+.content {
+    margin: 40px;
+}

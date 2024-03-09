@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Cool Website - {% block page_title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navigation">
+        <a href="/">Home</a>
+        {% if not session['user_id'] %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% endif %}
+        {% if session['user_id'] %}
+            <a href="/logout">Logout</a>
+        {% endif %}
+    </nav>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>  
+    <div class="container" style="margin-top: 2em">
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{category}}">{{ msg }}</div>
+    {% endfor %}
+    <script src="/static/script.js"></script> <!-- Probably isn't necessary for this exercise but you never know... -->
+</body>
+</html>

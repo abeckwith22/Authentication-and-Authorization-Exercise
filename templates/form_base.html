@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Cool Website - {% block form_title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navigation">
+        <a href="/">Home</a>
+        {% if not session['user_id'] %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% endif %}
+        {% if session['user_id'] %}
+            <a href="/logout">Logout</a>
+        {% endif %}
+    </nav>
+    <div class="content">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <p>
+                {{ field.label }}
+                {{ field }}
+
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            </p>
+            {% endfor %}
+            <button>Submit</button>
+        </form>
+    </div>
+</body>
+</html>
